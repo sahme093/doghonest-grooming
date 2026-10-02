@@ -2,6 +2,9 @@ import { useState } from "react";
 import { salon } from "../config.js";
 import { buildSmsHref, buildMailHref, isMobileDevice } from "../utils/sms.js";
 
+const SPECIES = Object.keys(salon.services);
+const SPECIES_LABELS = { dog: "Dog", cat: "Cat" };
+
 const EMPTY_FIELDS = {
   pet: "",
   breed: "",
@@ -33,7 +36,7 @@ function dayName(dateStr) {
 }
 
 export default function BookingForm() {
-  const [species, setSpecies] = useState("dog");
+  const [species, setSpecies] = useState(SPECIES[0]);
   const [selected, setSelected] = useState({});
   const [sizeIndex, setSizeIndex] = useState(null);
   const [firstVisit, setFirstVisit] = useState(null);
@@ -72,7 +75,7 @@ export default function BookingForm() {
       `Owner: ${fields.owner}`,
       `Phone: ${fields.phone}`,
       fields.email && `Email: ${fields.email}`,
-      `Pet: ${fields.pet} (${species === "dog" ? "Dog" : "Cat"}${fields.breed ? ", " + fields.breed : ""})`,
+      `Pet: ${fields.pet} (${SPECIES_LABELS[species] || species}${fields.breed ? ", " + fields.breed : ""})`,
       size && `Size: ${size[0]} (${size[1]})`,
       firstVisit != null && `First visit: ${firstVisit ? "Yes" : "No"}`,
       `Services: ${chosenServices.map((s) => s.name).join(", ")}`,
@@ -205,33 +208,27 @@ export default function BookingForm() {
   return (
     <form className="booking-form" onSubmit={handleSubmit} noValidate>
       <div className="field-grid">
-        <div className="toggle-group">
-          <span className="toggle-group__label">Your pet is a</span>
-          <div className="toggle-group__row">
-            <button
-              type="button"
-              className="toggle-btn"
-              aria-pressed={species === "dog"}
-              onClick={() => {
-                setSpecies("dog");
-                setSizeIndex(null);
-              }}
-            >
-              Dog
-            </button>
-            <button
-              type="button"
-              className="toggle-btn"
-              aria-pressed={species === "cat"}
-              onClick={() => {
-                setSpecies("cat");
-                setSizeIndex(null);
-              }}
-            >
-              Cat
-            </button>
+        {SPECIES.length > 1 && (
+          <div className="toggle-group">
+            <span className="toggle-group__label">Your pet is a</span>
+            <div className="toggle-group__row">
+              {SPECIES.map((sp) => (
+                <button
+                  key={sp}
+                  type="button"
+                  className="toggle-btn"
+                  aria-pressed={species === sp}
+                  onClick={() => {
+                    setSpecies(sp);
+                    setSizeIndex(null);
+                  }}
+                >
+                  {SPECIES_LABELS[sp] || sp}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="toggle-group">
           <span className="toggle-group__label">First visit with us?</span>
@@ -346,10 +343,11 @@ export default function BookingForm() {
           Preferred drop-off
           <select id="time" value={fields.time} onChange={(e) => setField("time", e.target.value)}>
             <option value="Any time">Any time</option>
-            <option value="8–10 am">8–10 am</option>
-            <option value="10 am–12 pm">10 am–12 pm</option>
-            <option value="12–2 pm">12–2 pm</option>
-            <option value="2–4 pm">2–4 pm</option>
+            {salon.dropOffTimes.map((slot) => (
+              <option key={slot} value={slot}>
+                {slot}
+              </option>
+            ))}
           </select>
         </label>
       </div>
@@ -381,7 +379,7 @@ export default function BookingForm() {
             value={fields.phone}
             onChange={(e) => setField("phone", e.target.value)}
             autoComplete="tel"
-            placeholder="(951) 555-0123"
+            placeholder="(760) 555-0123"
             className={errors.phone ? "has-error" : ""}
             aria-invalid={Boolean(errors.phone)}
             aria-describedby="phone-error"

@@ -8,36 +8,38 @@
 // ============================================================================
 
 export const salon = {
-  name: "Your Salon Name",
-  shortName: "Your Salon",
+  name: "Doghonest Grooming",
+  shortName: "Doghonest",
 
   // Used in the hero heading as: "Pet grooming {highlight} {city}"
-  heroKicker: "Pet grooming",
+  heroKicker: "Gentle dog grooming",
   heroHighlight: "in",
-  heroCity: "Your City",
+  heroCity: "Coachella",
 
-  tagline: "Dogs & cats · Your City, ST",
+  tagline: "Dogs only · Coachella, CA",
 
   description:
-    "Add a short introduction here — what makes your grooming salon different, which pets you welcome, and why new clients should book with you.",
+    "Unhurried, one-on-one grooming with Maria. Nervous rescues, heavy shedders and big double coats are all welcome. Every dog gets her full attention and goes home clean, trimmed and happy.",
 
-  // E.164 format — used for tel: / sms: links. +1 555 555 0100 is a reserved
-  // fictional number block, safe to leave in place until you add a real one.
-  phone: "+15555550100",
-  phoneDisplay: "(555) 555-0100",
+  // E.164 format — used for tel: / sms: links.
+  phone: "+17602382167",
+  phoneDisplay: "(760) 238-2167",
 
   email: "", // leave blank to hide the "send by email" fallback link
 
+  // line1/zip are blank because the salon doesn't publish a street address —
+  // components fall back to showing just the city and `addressNote`.
   address: {
-    line1: "123 Main Street",
-    city: "Your City",
-    state: "ST",
-    zip: "00000",
+    line1: "",
+    city: "Coachella",
+    state: "CA",
+    zip: "",
   },
+  addressNote: "Call or text for the exact location.",
 
   // Google Maps embed + link query. Kept separate from the address object
   // so you can hand-tune the query string without reformatting the address.
-  mapsQuery: "123 Main Street, Your City, ST 00000",
+  mapsQuery: "Coachella, CA",
 
   // 0 = Sunday ... 6 = Saturday, matching Date#getDay().
   hours: [
@@ -47,29 +49,29 @@ export const salon = {
     { day: "Wednesday", open: "9:00 am", close: "5:00 pm" },
     { day: "Thursday", open: "9:00 am", close: "5:00 pm" },
     { day: "Friday", open: "9:00 am", close: "5:00 pm" },
-    { day: "Saturday", open: "9:00 am", close: "2:00 pm" },
+    { day: "Saturday", open: null, close: null },
   ],
-  hoursSummary: "Mon–Fri, 9am–5pm · Sat 9am–2pm",
+  hoursSummary: "Mon–Fri, 9am–5pm · Closed weekends",
+
+  // Options for the "Preferred drop-off" select in the booking form.
+  dropOffTimes: ["9–11 am", "11 am–1 pm", "1–3 pm"],
 
   // Toggle to show/hide "from $X" price labels next to each service.
-  // Prices below are placeholder sample values — replace with your own.
+  // Prices are unset — add real ones before turning this on.
   showPrices: false,
 
+  // Keyed by species. Only species listed here appear in the booking form
+  // (a single species hides the Dog/Cat toggle). Add an optional `group` to
+  // split a species' services into separately titled cards.
   services: {
     dog: [
-      { name: "Full service grooming", price: 80 },
-      { name: "Bathing and blow dry", price: 40 },
-      { name: "Nail trimming", price: 15 },
-      { name: "Ear cleaning", price: 10 },
-      { name: "Teeth brushing", price: 10 },
-      { name: "Anal gland expression", price: 15 },
-      { name: "Flea and tick treatment", price: 20 },
-    ],
-    cat: [
-      { name: "Cat grooming", price: 65 },
-      { name: "Cat bathing", price: 50 },
-      { name: "Cat nail trimming", price: 15 },
-      { name: "Cat ear cleaning", price: 10 },
+      { name: "Full service grooming" },
+      { name: "Grooming and styling" },
+      { name: "Bathing and blow dry" },
+      { name: "Nail trimming" },
+      { name: "Ear cleaning" },
+      { name: "Anal gland expression" },
+      { name: "Flea and tick treatment" },
     ],
   },
 
@@ -81,101 +83,92 @@ export const salon = {
       ["Large", "50–90 lb"],
       ["XL", "90+ lb"],
     ],
-    cat: [
-      ["Small", "under 8 lb"],
-      ["Medium", "8–12 lb"],
-      ["Large", "12+ lb"],
-    ],
   },
 
-  // Sample gallery — swap these files in /public/assets and update the alt
-  // text to describe each real photo.
+  // The first three photos also appear in the hero.
   gallery: [
-    { src: "/assets/p5.webp", alt: "Sample gallery photo — replace with your own grooming photos" },
-    { src: "/assets/p1.webp", alt: "Sample gallery photo — replace with your own grooming photos" },
-    { src: "/assets/p3.webp", alt: "Sample gallery photo — replace with your own grooming photos" },
+    { src: "/assets/dog-bichon.webp", alt: "Fluffy white dog after a groom, wearing a leaf-print bandana" },
+    { src: "/assets/dog-pomeranians.webp", alt: "Two Pomeranians on the grooming table wearing a red and a blue bow tie" },
+    { src: "/assets/dog-frenchie.webp", alt: "Blue French Bulldog wearing a pumpkin-print bandana" },
   ],
 
-  // Sample reviews — fictional names and quotes. Replace with your own
-  // reviews (e.g. copied from Google) before publishing.
+  // Google reviews.
   reviews: [
     {
-      name: "Jordan P.",
-      when: "3 years ago",
-      text: "Wonderful experience from start to finish! The groomer was so patient with my pup and did an amazing job with the cut. Highly recommend!",
+      name: "Laura G.",
+      when: "3 months ago",
+      text: "Love Dog Honest Grooming. The absolute best hair cut my sweet Bella has ever had.",
     },
     {
-      name: "Sam R.",
+      name: "Moises L.",
       when: "a year ago",
-      text: "Such a great job on both of our pets! Very patient with them and takes the time to get every detail right. They also send lots of update photos during the appointment, which we love.",
+      text: "I recently took my dog to Dog Honest Grooming LLC and was thoroughly impressed! Maria was gentle and attentive, leaving my pup looking clean, well-trimmed, and happy. The service was quick, and Maria genuinely cared about my dog's comfort. Highly recommend for any pet parent!",
     },
     {
-      name: "Taylor M.",
+      name: "Jennifer B.",
+      when: "2 years ago",
+      text: "Maria was amazing. Friendly and professional. I have two dogs and one is a recent rescue who is still nervous. Maria handled her perfectly and was able to complete Rosie’s first professional grooming. Both dogs look amazing. I would highly recommend Maria. I will definitely be a repeat customer.",
+    },
+    {
+      name: "Gloria B.",
+      when: "2 years ago",
+      text: "We drive from AZ just to get our two goldens groomed. Our dogs did not have the best experience with groomers prior to us finding Dog Honest. Our dogs love Maria. Her attention to detail and love for these animals is unmatched.",
+    },
+    {
+      name: "Guadalupe R.",
+      when: "2 years ago",
+      text: "We got Dog Honest for the first time to groom our babies (frenchies) and we were absolutely amazed with the awesome service provided. We absolutely loved the service and customer service. No more PetSmart — Dog Honest is now the family’s new dog groomer. We loved the tie included in the service, made my babies look super adorable ♥️",
+    },
+    {
+      name: "Aaron G.",
+      when: "2 years ago",
+      text: "I have a Husky Akita mix that has a ton of fur. I have tried so many groomers and was never satisfied with the result. Maria is by far the best groomer to ever work on my dog and I likely will never use another groomer as long as she is available. She took her time and did not rush the service and my boy came out looking fresh! I couldn’t recommend her enough if you’re considering trying out her service!!!",
+    },
+    {
+      name: "Sabrina C.",
       when: "a year ago",
-      text: "Great job with our almost one-year-old puppy. Pricing was reasonable and they were very patient with our hyper little guy.",
-    },
-    {
-      name: "Casey L.",
-      when: "2 years ago",
-      text: "An incredible groomer — my dog was completely comfortable the whole time. Loved getting text updates with cute photos throughout the appointment. Highly recommend!",
-    },
-    {
-      name: "Morgan T.",
-      when: "3 weeks ago",
-      text: "Did an amazing job on our dog and left him looking great. We'll definitely be returning customers!",
-    },
-    {
-      name: "Alex W.",
-      when: "2 years ago",
-      text: "We love bringing our dogs here — the team is so good with them, even with tricky coats and big personalities. Incredible work every time!",
-    },
-    {
-      name: "Riley M.",
-      when: "a year ago",
-      text: "I've been taking my dog here weekly and I'm so happy with how great they always look. Wouldn't go anywhere else.",
-    },
-    {
-      name: "Amanda P.",
-      when: "2 years ago",
-      text: "Always responds promptly and my pet leaves happier and looking better every time. Highly recommend!",
+      text: "Maria is great! My Frenchie sheds a lot and I love that she takes her time with him by giving him a deshedding bath! He was nervous the first time but she made him feel comfortable and now he doesn’t mind the process. She’s great with communicating as well! Highly recommend especially if you have a dog that sheds a lot!",
     },
   ],
 
-  // Sample neutral palette — not tied to any brand. Applied at runtime as
-  // CSS custom properties (see src/main.jsx), so this object is the ONE
-  // place that defines the site's color palette. Swap these for your own
-  // brand colors; keep accentStrong/accentDeep/accentLabel dark enough to
-  // clear WCAG AA contrast against the light backgrounds they sit on.
+  // Palette pulled from the logo: paw-pad orange, leaf green and the
+  // olive-brown wordmark on its cream background. Applied at runtime as CSS
+  // custom properties (see src/main.jsx), so this object is the ONE place
+  // that defines the site's colors. accentStrong/accentDeep/accentLabel are
+  // deepened versions of the logo hues so text set in them clears WCAG AA
+  // (large text 3:1, small text 4.5:1) against the light backgrounds.
   colors: {
-    bg: "#FAF6EF",
+    bg: "#FFFCED",
     surface: "#FFFFFF",
-    surfaceAlt: "#F3EDE3",
-    ink: "#1D1B18",
-    inkSoft: "#4F4A43",
-    inkMute: "#6B655C",
-    border: "rgba(29,27,24,.1)",
-    borderStrong: "rgba(29,27,24,.18)",
-    accent: "#EFA73C",
-    accentHover: "#F3B657",
-    // Darkened slightly from the source design's #C98323 / #B06F14 so text
-    // set in these colors clears WCAG AA contrast against the cream/white
-    // backgrounds they sit on (large hero text needs 3:1, the small eyebrow
-    // labels need 4.5:1) — same hue, just a touch deeper.
-    accentStrong: "#B8741A",
-    accentDeep: "#9A5F0E",
-    accentLabel: "#8A5A10",
-    highlight: "#FDF1DC",
-    selection: "#F4D49B",
-    onDark: "#FAF6EF",
+    surfaceAlt: "#EEF7E4",
+    placeholder: "#F5EDD3",
+    ink: "#3B3215",
+    inkHover: "#564A22",
+    inkSoft: "#5A5132",
+    inkMute: "#6B6345",
+    onDarkSoft: "#D9CFB0",
+    border: "rgba(59,50,21,.12)",
+    borderStrong: "rgba(59,50,21,.22)",
+    accent: "#FF8434",
+    accentHover: "#FF9A55",
+    accentStrong: "#C8550C",
+    accentDeep: "#A9460A",
+    accentLabel: "#3D7A22",
+    leaf: "#6BC748",
+    leafSoft: "#DDF0CF",
+    highlight: "#FFE9D3",
+    selection: "#FFD0AE",
+    onDark: "#FFFCED",
     error: "#B3261E",
-    openDot: "#3E9B5A",
-    closedDot: "#C9A27A",
+    openDot: "#4FA82E",
+    closedDot: "#D6A27A",
   },
 
   fonts: {
-    display: "'Josefin Sans', sans-serif",
-    body: "'Jost', system-ui, sans-serif",
+    display: "'Fredoka', 'Nunito', system-ui, sans-serif",
+    body: "'Nunito', system-ui, sans-serif",
+    // Keep in sync with the <link> in index.html.
     googleFontsHref:
-      "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Jost:wght@400;500;600&display=swap",
+      "https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap",
   },
 };

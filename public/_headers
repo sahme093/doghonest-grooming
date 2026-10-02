@@ -1,0 +1,4 @@
+# Demo site: keep every page out of search engines.
+# Remove this rule when the site goes live for real.
+/*
+  X-Robots-Tag: noindex, nofollow

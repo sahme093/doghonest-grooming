@@ -29,10 +29,11 @@ export default function Seo() {
       description: salon.description,
       address: {
         "@type": "PostalAddress",
-        streetAddress: salon.address.line1,
+        // Blank fields become undefined so JSON.stringify drops them.
+        streetAddress: salon.address.line1 || undefined,
         addressLocality: salon.address.city,
         addressRegion: salon.address.state,
-        postalCode: salon.address.zip,
+        postalCode: salon.address.zip || undefined,
         addressCountry: "US",
       },
       openingHoursSpecification: salon.hours

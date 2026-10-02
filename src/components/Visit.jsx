@@ -1,10 +1,11 @@
 import { salon } from "../config.js";
 import { getWeekRows } from "../utils/hours.js";
+import { getLocality } from "../utils/address.js";
 
 export default function Visit() {
   const rows = getWeekRows(salon.hours);
-  const fullAddress = `${salon.address.line1}, ${salon.address.city}, ${salon.address.state} ${salon.address.zip}`;
-  const encodedAddress = encodeURIComponent(fullAddress);
+  const hasStreet = Boolean(salon.address.line1);
+  const encodedQuery = encodeURIComponent(salon.mapsQuery);
 
   return (
     <section id="visit" className="container visit-section">
@@ -30,33 +31,46 @@ export default function Visit() {
 
         <div className="visit-contact">
           <a
-            href={`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${encodedQuery}`}
             target="_blank"
             rel="noopener"
           >
-            {salon.address.line1}
-            <br />
-            {salon.address.city}, {salon.address.state} {salon.address.zip}
+            {hasStreet && (
+              <>
+                {salon.address.line1}
+                <br />
+              </>
+            )}
+            {getLocality(salon.address)}
           </a>
+          {!hasStreet && salon.addressNote && (
+            <span className="visit-contact__note">{salon.addressNote}</span>
+          )}
           <a href={`tel:${salon.phone}`} className="visit-contact__phone">
             {salon.phoneDisplay}
           </a>
         </div>
 
-        <a
-          href={`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`}
-          target="_blank"
-          rel="noopener"
-          className="btn btn-outline"
-        >
-          Get directions
-        </a>
+        {hasStreet ? (
+          <a
+            href={`https://www.google.com/maps/dir/?api=1&destination=${encodedQuery}`}
+            target="_blank"
+            rel="noopener"
+            className="btn btn-outline"
+          >
+            Get directions
+          </a>
+        ) : (
+          <a href={`tel:${salon.phone}`} className="btn btn-outline">
+            Call for the address
+          </a>
+        )}
       </div>
 
       <div className="map-frame">
         <iframe
-          title={`Map to ${salon.name}`}
-          src={`https://maps.google.com/maps?q=${encodedAddress}&z=14&output=embed`}
+          title={`Map of ${getLocality(salon.address)}`}
+          src={`https://maps.google.com/maps?q=${encodedQuery}&z=${hasStreet ? 14 : 12}&output=embed`}
           loading="lazy"
         />
       </div>

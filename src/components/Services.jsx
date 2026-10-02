@@ -1,5 +1,21 @@
 import { salon } from "../config.js";
 
+const SPECIES_TITLES = { dog: "Dogs", cat: "Cats" };
+
+// One card per `group` in config.js; services without a group fall back to a
+// card named after their species ("Dogs", "Cats").
+function groupServices() {
+  const groups = new Map();
+  Object.entries(salon.services).forEach(([species, items]) => {
+    items.forEach((item) => {
+      const title = item.group || SPECIES_TITLES[species] || species;
+      if (!groups.has(title)) groups.set(title, []);
+      groups.get(title).push(item);
+    });
+  });
+  return [...groups.entries()];
+}
+
 function ServiceList({ title, items }) {
   return (
     <div className="service-card">
@@ -7,7 +23,7 @@ function ServiceList({ title, items }) {
       {items.map((item) => (
         <div className="service-row" key={item.name}>
           <span className="service-row__name">{item.name}</span>
-          {salon.showPrices && (
+          {salon.showPrices && item.price != null && (
             <span className="service-row__price">from ${item.price}</span>
           )}
         </div>
@@ -28,8 +44,9 @@ export default function Services() {
         </div>
 
         <div className="service-groups">
-          <ServiceList title="Dogs" items={salon.services.dog} />
-          <ServiceList title="Cats" items={salon.services.cat} />
+          {groupServices().map(([title, items]) => (
+            <ServiceList key={title} title={title} items={items} />
+          ))}
         </div>
       </div>
     </section>
