@@ -733,6 +733,11 @@ textarea:focus-visible,
   color: var(--color-onDark);
 }
 
+.size-note {
+  font: 400 14px/1.5 var(--font-body);
+  color: var(--color-inkMute);
+}
+
 .size-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));

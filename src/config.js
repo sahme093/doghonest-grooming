@@ -12,14 +12,14 @@ export const salon = {
   shortName: "Doghonest",
 
   // Used in the hero heading as: "Pet grooming {highlight} {city}"
-  heroKicker: "Gentle dog grooming",
+  heroKicker: "Small dog grooming",
   heroHighlight: "in",
   heroCity: "Coachella",
 
-  tagline: "Dogs only · Coachella, CA",
+  tagline: "Small dogs under 25 lb · Coachella, CA",
 
   description:
-    "Unhurried, one-on-one grooming with Maria. Nervous rescues, heavy shedders and big double coats are all welcome. Every dog gets her full attention and goes home clean, trimmed and happy.",
+    "Unhurried, one-on-one grooming with Maria, who specializes in small dogs under 25 lb. Nervous rescues and heavy shedders are welcome. Every pup gets her full attention and goes home clean, trimmed and happy.",
 
   // E.164 format — used for tel: / sms: links.
   phone: "+17602382167",
@@ -78,12 +78,13 @@ export const salon = {
   // [label, sublabel] pairs shown as size-picker buttons in the booking form.
   sizes: {
     dog: [
-      ["Small", "under 20 lb"],
-      ["Medium", "20–50 lb"],
-      ["Large", "50–90 lb"],
-      ["XL", "90+ lb"],
+      ["Toy", "under 10 lb"],
+      ["Small", "10–25 lb"],
+      ["Larger", "over 25 lb"],
     ],
   },
+  // Optional line shown under the size picker. Leave blank to hide it.
+  sizeNote: "Maria specializes in small dogs under 25 lb. For larger dogs, we’ll confirm availability when we reply.",
 
   // The first three photos also appear in the hero.
   gallery: [

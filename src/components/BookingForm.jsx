@@ -275,13 +275,14 @@ export default function BookingForm() {
             id="breed"
             value={fields.breed}
             onChange={(e) => setField("breed", e.target.value)}
-            placeholder={species === "dog" ? "Goldendoodle" : "Persian"}
+            placeholder={species === "dog" ? "Maltipoo" : "Persian"}
           />
         </label>
       </div>
 
       <div className="toggle-group">
         <span className="toggle-group__label">Size / weight</span>
+        {salon.sizeNote && <span className="size-note">{salon.sizeNote}</span>}
         <div className="size-grid">
           {salon.sizes[species].map(([label, sub], i) => (
             <button
